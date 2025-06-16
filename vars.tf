@@ -29,7 +29,7 @@ variable "proxmox_api_token_secret" {
   default = "c64db78b-1ba7-4b32-9922-1b8f83f526bb"
 }
 variable "vm_ip_prefix" {
-  default = "10.0.0.0/24"
+  default = "10.0.0.0"
 }
 
 variable "vm_ip_start_octet" {
