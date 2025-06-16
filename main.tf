@@ -25,7 +25,7 @@ locals {
 # --- Resource Definition ---
 resource "proxmox_vm_qemu" "k8sTest" {
   # Create instances (set back to 9 if needed, using 3 for testing based on your paste)
-  count = 6
+  count = 1
 
   # --- VM Naming ---
   name = "k8s-test-0${count.index + 1}"
