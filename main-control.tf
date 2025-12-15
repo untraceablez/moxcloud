@@ -2,7 +2,7 @@ terraform {
   required_providers {
     proxmox = {
       source  = "telmate/proxmox"
-      version = "3.0.1-rc8"
+      version = "3.0.2-rc05"
     }
   }
 }
@@ -19,16 +19,17 @@ locals {
     var.proxmox_host_01,
     var.proxmox_host_02,
     var.proxmox_host_03,
+    var.proxmox_host_04,
   ]
 }
 
 # --- Resource Definition ---
-resource "proxmox_vm_qemu" "k8sTest" {
+resource "proxmox_vm_qemu" "k8sDev" {
   # Create instances (set back to 9 if needed, using 3 for testing based on your paste)
-  count = 1
+  count = 3
 
   # --- VM Naming ---
-  name = "k8s-test-0${count.index + 1}"
+  name = "k8s-dev-ctrl-0${count.index + 1}"
 
   # --- Target Node ---
   target_node = local.target_hosts[count.index % 3]
@@ -39,9 +40,10 @@ resource "proxmox_vm_qemu" "k8sTest" {
   # --- VM Base Configuration ---
   agent    = 1 # Enable QEMU guest agent
   os_type  = "cloud-init"
-  cores    = 2
-  sockets  = 1
-  cpu_type = "kvm64"
+  cpu { 
+    cores = 2
+    sockets  = 1
+    }
   memory   = 2048 # 2GB RAM
   scsihw   = "virtio-scsi-pci"
   boot     = "order=scsi0" # Explicitly set boot order, scsi0 first
@@ -64,7 +66,7 @@ resource "proxmox_vm_qemu" "k8sTest" {
       scsi0 {
         disk {
           # Arguments are now directly under scsi0, not a nested 'disk' block
-          storage = "vms" # Storage Pool ID for the disk
+          storage = "talos-hosts" # Storage Pool ID for the disk
           size    = 32    # Size in GB (no 'G')
           # iothread = true  # Use iothread
           # 'type' and 'storage_type' are removed as they caused errors.
@@ -86,7 +88,7 @@ resource "proxmox_vm_qemu" "k8sTest" {
 
   # --- Cloud-Init Configuration ---
   # 'ipconfig0' and 'sshkeys' are now top-level under the resource
-  ipconfig0 = "ip=${var.vm_ip_prefix}.${var.vm_ip_start_octet + count.index}${var.vm_subnet_mask},gw=${var.vm_gateway}"
+  ipconfig0 = "ip=dhcp"
 
   sshkeys = <<EOF
   ${var.ssh_key}
