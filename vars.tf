@@ -19,7 +19,7 @@ variable "proxmox_host_04" {
 }
 
 variable "template_name" {
-  default = "cloudinit-template-10-18-25"
+  default = "terraform-12-17-25"
 }
 variable "proxmox_api_url" {
   default = "https://10.0.0.192:8006/api2/json"
