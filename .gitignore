@@ -1,5 +1,10 @@
-.terraform
-.terraform.*
-terraform.tfstate*
-k8s-test.tf
+terraform/.terraform
+terraform/.terraform.*
+terraform/terraform.tfstate*
 *.pub
+cloudinit/cloudinit-template/*.img
+cloudinit/cloudinit-template/*.manifest
+cloudinit/cloudinit-template/*.env
+terraform/plans/*
+keys/*
+cloudinit/cloudinit-template/keys/*.pub
