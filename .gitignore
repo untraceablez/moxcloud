@@ -2,9 +2,9 @@ terraform/.terraform
 terraform/.terraform.*
 terraform/terraform.tfstate*
 *.pub
-cloudinit/cloudinit-template/*.img
-cloudinit/cloudinit-template/*.manifest
-cloudinit/cloudinit-template/*.env
+cloudinit/*.img
+cloudinit/*.manifest
+cloudinit/*.env
 terraform/plans/*
 keys/*
-cloudinit/cloudinit-template/keys/*.pub
+cloudinit/keys/*.pub
