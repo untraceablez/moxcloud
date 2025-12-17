@@ -25,3 +25,13 @@ The main goal is to deploy VMs for using as nodes in a [Kubernetes](https://kube
 * `cloudinit`: This directory features the scripts needed to generate a customized cloud-init image, as well as a cron job to pull down the latest img from Canonical on a schedule. This allows us to have a constantly fresh template from which to deploy our VMs. 
 
 * `terraform`: This directory contains all the files for deploying your actual VM clusters. Within this directory is an example directory for deploying a 6 node (3 control, 3 worker) cluster oriented for Kubernetes. Use this as a starting point for creating your own files. 
+
+## Usage
+
+*Lorem ipsum dolor sit amet.*
+
+### Thanks
+
+* A big thanks to the folks working on the [telmate/proxmox](https://github.com/Telmate/terraform-provider-proxmox) provider for Terraform. Without their awesome code, this repo wouldn't do much of anything!
+
+* Credit to Volkan Baga & Wizards of the Coast, the name of this repository, and the fun little background, are inspired by Mox Opal, a beautiful and powerful Magic: The Gathering card. 
