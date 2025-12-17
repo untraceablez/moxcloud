@@ -1,32 +1,7 @@
-terraform {
-  required_providers {
-    proxmox = {
-      source  = "telmate/proxmox"
-      version = "3.0.2-rc05"
-    }
-  }
-}
-
-provider "proxmox" {
-  pm_api_url          = var.proxmox_api_url
-  pm_api_token_id     = var.proxmox_api_token_id
-  pm_api_token_secret = var.proxmox_api_token_secret
-  pm_tls_insecure     = true
-}
-
-locals {
-  target_hosts = [
-    var.proxmox_host_01,
-    var.proxmox_host_02,
-    var.proxmox_host_03,
-    var.proxmox_host_04,
-  ]
-}
-
 # --- Resource Definition ---
-resource "proxmox_vm_qemu" "k8sDev" {
+resource "proxmox_vm_qemu" "k8sDevWorker" {
   # Create instances (set back to 9 if needed, using 3 for testing based on your paste)
-  count = 3
+  count = 0
 
   # --- VM Naming ---
   name = "k8s-dev-wrkr-0${count.index + 1}"
@@ -86,9 +61,17 @@ resource "proxmox_vm_qemu" "k8sDev" {
     bridge = "vmbr0"
   }
 
+  network {
+    id     = 1
+    model  = "virtio"
+    bridge = "vmbr0"
+    tag    = 5
+  }
+
   # --- Cloud-Init Configuration ---
   # 'ipconfig0' and 'sshkeys' are now top-level under the resource
   ipconfig0 = "ip=dhcp"
+  ipconfig1 = "ip=dhcp"
 
   sshkeys = <<EOF
   ${var.ssh_key}

@@ -26,7 +26,7 @@ locals {
 # --- Resource Definition ---
 resource "proxmox_vm_qemu" "k8sDev" {
   # Create instances (set back to 9 if needed, using 3 for testing based on your paste)
-  count = 3
+  count = 0
 
   # --- VM Naming ---
   name = "k8s-dev-ctrl-0${count.index + 1}"
@@ -86,9 +86,17 @@ resource "proxmox_vm_qemu" "k8sDev" {
     bridge = "vmbr0"
   }
 
+  network {
+    id     = 1
+    model  = "virtio"
+    bridge = "vmbr0"
+    tag    = 5
+  }
+
   # --- Cloud-Init Configuration ---
   # 'ipconfig0' and 'sshkeys' are now top-level under the resource
   ipconfig0 = "ip=dhcp"
+  ipconfig1 = "ip=dhcp"
 
   sshkeys = <<EOF
   ${var.ssh_key}
