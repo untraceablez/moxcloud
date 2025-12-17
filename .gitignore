@@ -2,3 +2,4 @@
 .terraform.*
 terraform.tfstate*
 k8s-test.tf
+*.pub
