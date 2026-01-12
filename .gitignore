@@ -8,3 +8,4 @@ cloudinit/*.env
 terraform/plans/*
 keys/*
 cloudinit/keys/*.pub
+.claude
