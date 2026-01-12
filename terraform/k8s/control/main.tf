@@ -25,14 +25,14 @@ locals {
 
 # --- Resource Definition ---
 resource "proxmox_vm_qemu" "k8sDev" {
-  # Create instances (set back to 9 if needed, using 3 for testing based on your paste)
-  count = 0
+  # Create control plane instances
+  count = 3
 
   # --- VM Naming ---
   name = "k8s-dev-ctrl-0${count.index + 1}"
 
   # --- Target Node ---
-  target_node = local.target_hosts[count.index % 3]
+  target_node = local.target_hosts[count.index % length(local.target_hosts)]
 
   # --- Source Template ---
   clone = var.template_name
@@ -40,14 +40,14 @@ resource "proxmox_vm_qemu" "k8sDev" {
   # --- VM Base Configuration ---
   agent    = 1 # Enable QEMU guest agent
   os_type  = "cloud-init"
-  cpu { 
+  cpu {
     cores = 2
     sockets  = 1
     }
   memory   = 2048 # 2GB RAM
   scsihw   = "virtio-scsi-pci"
   boot     = "order=scsi0" # Explicitly set boot order, scsi0 first
-  tags     = "k8s"
+  tags     = "k8s,control-plane"
 
   # --- Disk Configuration ---
   # The 'disks' block is specific to provider v3+ and contains only disk definitions
@@ -98,9 +98,9 @@ resource "proxmox_vm_qemu" "k8sDev" {
   ipconfig0 = "ip=dhcp"
   ipconfig1 = "ip=dhcp"
 
-  sshkeys = <<EOF
+  sshkeys = <<EOT
   ${var.ssh_key}
-  EOF
+  EOT
 
   # --- Lifecycle ---
   lifecycle {
