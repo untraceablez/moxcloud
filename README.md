@@ -73,4 +73,4 @@ If you prefer to work directly with the repository:
 
 * A big thanks to the folks working on the [telmate/proxmox](https://github.com/Telmate/terraform-provider-proxmox) provider for Terraform. Without their awesome code, this repo wouldn't do much of anything!
 
-* Credit to Volkan Baga & Wizards of the Coast, the name of this repository, and the fun little background, are inspired by Mox Opal, a beautiful and powerful Magic: The Gathering card. 
+* Credit to [Volkan Baga](https://baga.de/) & [Wizards of the Coast](https://company.wizards.com/en), the name of this repository, and the fun little background, are inspired by [Mox Opal](https://scryfall.com/card/som/179/mox-opal), a beautiful and powerful [Magic: The Gathering](https://magic.wizards.com/en) card. 
