@@ -9,3 +9,4 @@ terraform/plans/*
 keys/*
 cloudinit/keys/*.pub
 .claude
+moxcloud-install.sh

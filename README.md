@@ -26,9 +26,50 @@ The main goal is to deploy VMs for using as nodes in a [Kubernetes](https://kube
 
 * `terraform`: This directory contains all the files for deploying your actual VM clusters. Within this directory is an example directory for deploying a 6 node (3 control, 3 worker) cluster oriented for Kubernetes. Use this as a starting point for creating your own files. 
 
-## Usage
+## Quick Start
 
-*Lorem ipsum dolor sit amet.*
+### Using the Self-Extracting Installer
+
+The easiest way to get started is with the single-file installer:
+
+```bash
+# Download the installer (from releases or build it yourself)
+wget https://github.com/untraceablez/moxcloud/releases/latest/download/moxcloud-install.sh
+
+# Run the installer
+bash moxcloud-install.sh
+
+# Follow the setup wizard
+cd moxcloud
+./template-setup.sh
+
+# Create your cloud-init template
+./template-script.sh
+```
+
+See [USAGE-EXAMPLE.md](USAGE-EXAMPLE.md) for more installation options and examples.
+
+### Building the Installer
+
+If you want to build the installer yourself:
+
+```bash
+git clone https://github.com/untraceablez/moxcloud.git
+cd moxcloud
+./build-installer.sh
+```
+
+This creates `moxcloud-install.sh` - a single file you can distribute to users.
+
+## Manual Setup
+
+If you prefer to work directly with the repository:
+
+1. Clone this repository
+2. Navigate to `cloudinit/`
+3. Run `./template-setup.sh` to configure your template
+4. Run `./template-script.sh` to create the cloud-init template in Proxmox
+5. Use the Terraform configurations in `terraform/` to deploy VMs
 
 ### Thanks
 

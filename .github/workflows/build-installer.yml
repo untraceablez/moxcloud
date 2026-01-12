@@ -1,0 +1,38 @@
+name: Build Installer
+
+on:
+  release:
+    types: [created]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build installer
+        run: |
+          chmod +x build-installer.sh
+          ./build-installer.sh
+
+      - name: Upload installer to release
+        if: github.event_name == 'release'
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./moxcloud-install.sh
+          asset_name: moxcloud-install.sh
+          asset_content_type: application/x-sh
+
+      - name: Upload installer as artifact
+        if: github.event_name != 'release'
+        uses: actions/upload-artifact@v4
+        with:
+          name: moxcloud-installer
+          path: moxcloud-install.sh
+          retention-days: 30
