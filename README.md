@@ -5,7 +5,7 @@
   <p><strong>A launch platform for automated cluster deployment via Terraform, cloud-init, and Proxmox.</strong></p>
 
   [![GitHub Release](https://img.shields.io/github/v/release/untraceablez/moxcloud)](https://github.com/untraceablez/moxcloud/releases)
-  [![License](https://img.shields.io/github/license/untraceablez/moxcloud)](https://github.com/untraceablez/moxcloud/blob/001-household-inventory/LICENSE)
+  [![License](https://img.shields.io/github/license/untraceablez/moxcloud)](https://github.com/untraceablez/moxcloud/blob/main/LICENSE)
   [![GitHub Stars](https://img.shields.io/github/stars/untraceablez/moxcloud)](https://github.com/untraceablez/moxcloud/stargazers)
   [![GitHub Issues](https://img.shields.io/github/issues/untraceablez/moxcloud)](https://github.com/untraceablez/moxcloud/issues)
 
