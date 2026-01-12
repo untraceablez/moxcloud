@@ -47,8 +47,6 @@ cd moxcloud
 ./template-script.sh
 ```
 
-See [USAGE-EXAMPLE.md](USAGE-EXAMPLE.md) for more installation options and examples.
-
 ### Building the Installer
 
 If you want to build the installer yourself:
